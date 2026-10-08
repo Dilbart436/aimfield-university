@@ -1,4 +1,8 @@
-// Styles
+// Third-party styles
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "swiper/css";
+
+// Application styles
 import "../css/main.css";
 
 // Layout
@@ -14,22 +18,21 @@ import { initAuthModal } from "./components/auth-modal.js";
 // Theme
 import { initTheme } from "./components/theme.js";
 
-
 function initApp() {
-    // Layout
-    renderHeader();
-    renderFooter();
-    // Layout Components
-    initNavigation();
-    initMegaMenu();
-    // Components
-    initHeroSlider();
-    initPlacementSlider();
-    initAuthModal();
-    // Theme
-    initTheme();
+  // Layout
+  renderHeader();
+  renderFooter();
+  // Layout Components
+  initNavigation();
+  initMegaMenu();
+  // Components
+  initHeroSlider();
+  initPlacementSlider();
+  initAuthModal();
+  // Theme
+  initTheme();
 
-    console.log("AIMFIELD University application initialized.");
+  console.log("AIMFIELD University application initialized.");
 }
 
 initApp();

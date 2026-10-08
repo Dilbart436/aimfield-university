@@ -2,102 +2,125 @@
 
 /**
  * Theme Component
- * --------------------------------
- * Handles...
+ *
+ * --------------------------------------------------------------------------
+ * Handles the Theme interactions, including:
+ *
+ * - Initializing the saved theme
+ * - Switching between light and dark themes
+ * - Saving the selected theme
+ * - Updating theme toggle buttons
+ * - Updating theme icons
  */
 
-// -----------------------------------------------------------------------------
-// DOM Elements
-// -----------------------------------------------------------------------------
-// const themeToggleButtons = document.querySelectorAll(".js-theme-toggle");
-// const themeIcons = document.querySelectorAll(".nav__theme-icon");
-let themeToggleButtons = [];
-let themeIcons = [];
+// ------------------------------------------------------------------------
+// Imports
+// ------------------------------------------------------------------------
 
-// -----------------------------------------------------------------------------
+// ------------------------------------------------------------------------
 // Constants
-// -----------------------------------------------------------------------------
+// ------------------------------------------------------------------------
 const THEME = {
-    LIGHT: "light",
-    DARK: "dark"
+  LIGHT: "light",
+  DARK: "dark",
 };
 
-
-// -----------------------------------------------------------------------------
+// ------------------------------------------------------------------------
 // State
-// -----------------------------------------------------------------------------
+// ------------------------------------------------------------------------
 let currentTheme = THEME.LIGHT;
 
-
-// -----------------------------------------------------------------------------
-// Functions
-// -----------------------------------------------------------------------------
-function applyTheme(theme) {
-    document.documentElement.dataset.theme = theme;
-    currentTheme = theme;
-
-    updateThemeButton(theme);
-}
-
-function initializeTheme() {
-    const savedTheme = loadSavedTheme();
-
-    applyTheme(savedTheme || THEME.LIGHT);
-}
-
-function handleThemeToggle() {
-    const newTheme = currentTheme === THEME.LIGHT ? THEME.DARK : THEME.LIGHT;
-
-    applyTheme(newTheme);
-    saveTheme(newTheme);
-}
-
-
-// -----------------------------------------------------------------------------
-// Helper Functions
-// -----------------------------------------------------------------------------
-function saveTheme(theme) {
-    localStorage.setItem("theme", theme);
-}
-
-function loadSavedTheme() {
-    return localStorage.getItem("theme");
-}
-
-function updateThemeButton(theme) {
-    const isDarkTheme = theme === THEME.DARK;
-
-    themeToggleButtons.forEach((button) => {
-        button.setAttribute("aria-label",
-            isDarkTheme ? "Switch to light mode" : "Switch to dark mode");
-        button.setAttribute("aria-pressed", String(isDarkTheme));
-    });
-
-    themeIcons.forEach((icon) => {
-        icon.classList.toggle("fa-circle-half-stroke", isDarkTheme);
-        icon.classList.toggle("fa-moon", !isDarkTheme);
-    });
-}
-
-
-// -----------------------------------------------------------------------------
-// Event Listeners
-// -----------------------------------------------------------------------------
-function bindEventListeners() {
-    themeToggleButtons.forEach((button) => {
-        button.addEventListener("click", handleThemeToggle);
-    });
-}
-
-// -----------------------------------------------------------------------------
-// Initialization
-// -----------------------------------------------------------------------------
+// ------------------------------------------------------------------------
+// Public API
+// ------------------------------------------------------------------------
 export function initTheme() {
-    themeToggleButtons = document.querySelectorAll(".js-theme-toggle");
-    themeIcons = document.querySelectorAll(".nav__theme-icon");
+  // --------------------------------------------------------------------
+  // DOM Elements
+  // --------------------------------------------------------------------
+  const themeElements = {
+    toggleButtons: document.querySelectorAll(".js-theme-toggle"),
+    icons: document.querySelectorAll(".nav__theme-icon"),
+  };
 
-    if (themeToggleButtons.length === 0) return;
+  // --------------------------------------------------------------------
+  // Guard Clause
+  // --------------------------------------------------------------------
+  if (!themeElements.toggleButtons.length) {
+    return;
+  }
 
-    initializeTheme();
-    bindEventListeners();
+  // --------------------------------------------------------------------
+  // Load Saved Theme
+  // --------------------------------------------------------------------
+  const storedTheme = loadSavedTheme();
+
+  // --------------------------------------------------------------------
+  // Resolve Valid Theme
+  // --------------------------------------------------------------------
+  const selectedTheme =
+    storedTheme === THEME.LIGHT || storedTheme === THEME.DARK
+      ? storedTheme
+      : THEME.LIGHT;
+
+  // --------------------------------------------------------------------
+  // Apply Theme
+  // --------------------------------------------------------------------
+  applyTheme(themeElements, selectedTheme);
+
+  // --------------------------------------------------------------------
+  // Event Listeners
+  // --------------------------------------------------------------------
+  themeElements.toggleButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      switchTheme(themeElements);
+    });
+  });
+}
+
+// ------------------------------------------------------------------------
+// Private Helper Functions
+// ------------------------------------------------------------------------
+function applyTheme(themeElements, selectedTheme) {
+  document.documentElement.dataset.theme = selectedTheme;
+
+  currentTheme = selectedTheme;
+
+  updateThemeButton(themeElements, selectedTheme);
+}
+
+function switchTheme(themeElements) {
+  const newTheme = currentTheme === THEME.LIGHT ? THEME.DARK : THEME.LIGHT;
+
+  applyTheme(themeElements, newTheme);
+
+  saveTheme(newTheme);
+}
+
+function updateThemeButton(themeElements, selectedTheme) {
+  const isDarkTheme = selectedTheme === THEME.DARK;
+
+  themeElements.toggleButtons.forEach((button) => {
+    button.setAttribute(
+      "aria-label",
+      isDarkTheme ? "Switch to light mode" : "Switch to dark mode",
+    );
+
+    button.setAttribute("aria-pressed", String(isDarkTheme));
+  });
+
+  themeElements.icons.forEach((icon) => {
+    icon.classList.toggle("fa-moon", !isDarkTheme);
+    icon.classList.toggle("fa-circle-half-stroke", isDarkTheme);
+  });
+}
+
+// ------------------------------------------------------------------------
+// Utilities
+// ------------------------------------------------------------------------
+function loadSavedTheme() {
+  return localStorage.getItem("theme");
+}
+
+function saveTheme(theme) {
+  localStorage.setItem("theme", theme);
 }

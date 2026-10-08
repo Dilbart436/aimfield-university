@@ -11,16 +11,9 @@
 @import "./base/typography.css";
 
 /* ========================================
-   Utilities
-======================================== */
-@import "./utilities/helpers.css";
-@import "./utilities/container.css";
-@import "./utilities/page.css";
-
-/* ========================================
    Layout
 ======================================== */
-@import "./layout/header.css";
+@import "./layout/container.css";
 @import "./layout/hero.css";
 @import "./layout/search.css";
 @import "./layout/featured-programs.css";
@@ -32,4 +25,12 @@
 /* ========================================
    Components
 ======================================== */
+@import "./components/header.css";
+@import "./components/mega-menu.css";
 @import "./components/auth-modal.css";
+
+/* ========================================
+   Utilities
+======================================== */
+@import "./utilities/helpers.css";
+@import "./utilities/page.css";

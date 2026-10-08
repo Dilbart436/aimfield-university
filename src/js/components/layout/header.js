@@ -1,8 +1,6 @@
 import { getUrl } from "../../utils/url.js";
 
 const headerMarkup = `
-     <!-- Header -->
-   <header class="header">
       <div class="container">
 
          <nav class="nav" aria-label="Primary navigation">
@@ -19,13 +17,13 @@ const headerMarkup = `
                </span>
             </a>
 
-            <button class="nav__toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"
+            <button class="nav__toggle js-nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"
                aria-controls="primary-navigation">
                <i class="fa-solid fa-bars nav__toggle-icon" aria-hidden="true"></i>
             </button>
 
-            <!-- Links Container -->
-            <ul class="nav__links" id="primary-navigation">
+            <!-- Navigation List -->
+            <ul class="nav__list" id="primary-navigation">
 
                <li class="nav__item">
                   <a class="nav__link" href="${getUrl("pages/about/")}">About</a>
@@ -38,7 +36,7 @@ const headerMarkup = `
                      <i class="fa-solid fa-chevron-down nav__trigger-icon" aria-hidden="true">
                      </i>
                   </button>
-                  <!-- Mega-menu -->
+                  <!-- Departments Mega-menu -->
                   <div class="mega-menu" id="departments-menu">
                      <div class="mega-menu__inner">
 
@@ -119,7 +117,7 @@ const headerMarkup = `
                      </div>
                   </div>
                </li>
-
+                   <!-- Campus -->
                <li class="nav__item nav__item--mega">
                   <button class="nav__trigger" type="button" aria-expanded="false" aria-haspopup="true"
                      aria-controls="campus-life-menu">
@@ -384,7 +382,7 @@ const headerMarkup = `
                   </h3>
                </li>
 
-               <!-- Dark Mode -->
+               <!-- Mobile Dark Mode Btn -->
                <li class="nav__item">
                   <button class="nav__theme-button nav__theme-button--mobile js-theme-toggle" type="button"
                      aria-label="Switch to dark mode" aria-pressed="false">
@@ -402,44 +400,48 @@ const headerMarkup = `
 
                <!-- Mobile Authentication CTA -->
                <li class="nav__item nav__item--auth">
-                  <button class="nav__mobile-cta js-auth-trigger" type="button">
+                  <button class="nav__mobile-cta js-auth-trigger" 
+                     type="button">
                      <i class="fa-solid fa-user" aria-hidden="true"></i>
                      <span>Sign In</span>
                   </button>
                </li>
             </ul>
 
+            
+            <!-- Desktop Dark Mode Btn -->
             <div class="nav__actions">
-               <button class="nav__theme-button js-theme-toggle" type="button" aria-label="Switch to dark mode"
+               <button class="nav__theme-button js-theme-toggle" 
+                  type="button" aria-label="Switch to dark mode"
                   aria-pressed="false">
                   <i class="fa-solid fa-moon nav__theme-icon" aria-hidden="true"></i>
                </button>
 
-               <button class="nav__cta js-auth-trigger" type="button">
+               <button class="nav__desktop-cta js-auth-trigger" 
+                  type="button">
                   <i class="fa-solid fa-user" aria-hidden="true"></i>
                   <span>Sign In</span>
                </button>
             </div>
          </nav>
 
-      </div>
-   </header> `;
+      </div> `;
 
 export function renderHeader() {
-   const headerElement = document.querySelector("#site-header");
+  const headerElement = document.querySelector("#site-header");
 
-   if (!headerElement) {
-      return;
-   }
+  if (!headerElement) {
+    return;
+  }
 
-   // Prevent duplicate rendering
-   // if (headerElement.children.length > 0) {
-   //     return;
-   // }
+  // Prevent duplicate rendering
+  // if (headerElement.children.length > 0) {
+  //     return;
+  // }
 
-   if (headerElement.hasChildNodes()) {
-      return;
-   }
+  if (headerElement.hasChildNodes()) {
+    return;
+  }
 
-   headerElement.insertAdjacentHTML("afterbegin", headerMarkup);
+  headerElement.insertAdjacentHTML("afterbegin", headerMarkup);
 }

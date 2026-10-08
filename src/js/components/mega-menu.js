@@ -1,147 +1,168 @@
-// ====== Mega Menu Initialization ======
+"use strict";
+
+/**
+ * Mega Menu Component
+ *
+ * --------------------------------------------------------------------------
+ * Handles the Mega Menu interactions, including:
+ *
+ * - Opening and closing the Mega Menu
+ * - Updating ARIA attributes
+ * - Managing desktop hover interactions
+ * - Closing the Mega Menu when clicking outside the navigation
+ * - Closing the Mega Menu when pressing the Escape key
+ * - Closing the Mega Menu when switching from desktop to mobile
+ * - Ensuring only one Mega Menu is open at a time
+ */
+
+// ------------------------------------------------------------------------
+// Imports
+// ------------------------------------------------------------------------
+
+// ------------------------------------------------------------------------
+// Public API
+// ------------------------------------------------------------------------
 export function initMegaMenu() {
-    // Departments, Campus, Admissions and News
-    const megaMenuItems = document.querySelectorAll(".nav__item--mega");
+  // --------------------------------------------------------------------
+  // DOM Elements
+  // --------------------------------------------------------------------
+  const megaMenu = {
+    megaItems: document.querySelectorAll(".nav__item--mega"),
+    nav: document.querySelector(".nav"),
+    standardItems: document.querySelectorAll(
+      ".nav__item:not(.nav__item--mega)",
+    ),
+  };
 
-    if (!megaMenuItems.length) {
-        return;
-    }
+  // --------------------------------------------------------------------
+  // State
+  // --------------------------------------------------------------------
+  const isDesktop = window.matchMedia("(min-width: 1024px)");
+  let closeTimer = null;
 
-    const isDesktop = window.matchMedia("(min-width: 1024px)");
+  // --------------------------------------------------------------------
+  // Guard Clause
+  // --------------------------------------------------------------------
+  if (!megaMenu.megaItems.length || !megaMenu.nav) {
+    return;
+  }
 
-    let closeTimer = null;
-
-    const nav = document.querySelector(".nav");
-    const standardNavItems = document.querySelectorAll(".nav__item:not(.nav__item--mega)");
-
-    if (!nav) {
-        return;
-    }
-
-    megaMenuItems.forEach((megaMenuItem) => {
-        const trigger = megaMenuItem.querySelector(".nav__trigger");
-        const megaMenu = megaMenuItem.querySelector(".mega-menu");
-
-        if (!trigger || !megaMenu) {
-            return;
-        }
-
-        trigger.addEventListener("click", () => {
-            const isExpanded = megaMenuItem.classList.contains("nav__item--mega-active");
-
-            if (isExpanded) {
-                closeMegaMenu(megaMenuItem);
-                return;
-            }
-
-            openMegaMenu(megaMenuItem);
-
-        });
-
-        megaMenuItem.addEventListener("mouseenter", () => {
-            if (!isDesktop.matches) {
-                return;
-            }
-
-            clearTimeout(closeTimer);
-            openMegaMenu(megaMenuItem);
-        });
-    });
-
-    standardNavItems.forEach((navItem) => {
-        navItem.addEventListener("mouseenter", () => {
-            if (!isDesktop.matches) {
-                return;
-            }
-
-            clearTimeout(closeTimer);
-            closeActiveMegaMenu();
-        });
-    });
-
-    nav.addEventListener("mouseleave", () => {
-        if (!isDesktop.matches) {
-            return;
-        }
-
-        closeTimer = setTimeout(() => {
-            closeActiveMegaMenu();
-        }, 200);
-    });
-
-    document.addEventListener("click", (event) => {
-        const isClickInsideNav = event.target.closest(".nav");
-
-        if (isClickInsideNav) {
-            return;
-        }
-
-        closeActiveMegaMenu();
-    });
-
-    document.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape") {
-            return;
-        }
-
-        closeActiveMegaMenu();
-    });
-
-    isDesktop.addEventListener("change", (event) => {
-        if (event.matches) {
-            return;
-        }
-
-        closeActiveMegaMenu();
-    });
-}
-
-
-// ====== Helper Functions ======
-function openMegaMenu(megaMenuItem) {
-    if (!megaMenuItem) {
-        return;
-    }
-
-    // Ensure only one mega menu is open at a time
-    closeActiveMegaMenu();
-
-    megaMenuItem.classList.add("nav__item--mega-active");
-
+  // --------------------------------------------------------------------
+  // Event Listeners
+  // --------------------------------------------------------------------
+  megaMenu.megaItems.forEach((megaMenuItem) => {
     const trigger = megaMenuItem.querySelector(".nav__trigger");
+    const menu = megaMenuItem.querySelector(".mega-menu");
 
-    if (!trigger) {
-        return;
+    if (!trigger || !menu) {
+      return;
     }
 
-    trigger.setAttribute("aria-expanded", "true");
+    trigger.addEventListener("click", () => {
+      const isOpen = isMegaMenuOpen(megaMenuItem);
+
+      if (isOpen) {
+        closeMegaMenu(megaMenuItem);
+        return;
+      }
+      openMegaMenu(megaMenuItem);
+    });
+
+    megaMenuItem.addEventListener("mouseenter", () => {
+      if (!isDesktop.matches) {
+        return;
+      }
+      clearTimeout(closeTimer);
+      openMegaMenu(megaMenuItem);
+    });
+  });
+
+  megaMenu.standardItems.forEach((navItem) => {
+    navItem.addEventListener("mouseenter", () => {
+      if (!isDesktop.matches) {
+        return;
+      }
+      clearTimeout(closeTimer);
+      closeActiveMegaMenu();
+    });
+  });
+
+  megaMenu.nav.addEventListener("mouseleave", () => {
+    if (!isDesktop.matches) {
+      return;
+    }
+    closeTimer = setTimeout(() => {
+      closeActiveMegaMenu();
+    }, 200);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!isClickInsideNavigation(event)) {
+      closeActiveMegaMenu();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") {
+      return;
+    }
+    closeActiveMegaMenu();
+  });
+
+  isDesktop.addEventListener("change", (event) => {
+    if (event.matches) {
+      return;
+    }
+    closeActiveMegaMenu();
+  });
 }
 
+// ------------------------------------------------------------------------
+// Private Helper Functions
+// ------------------------------------------------------------------------
+function openMegaMenu(megaMenuItem) {
+  if (!megaMenuItem) {
+    return;
+  }
+  closeActiveMegaMenu();
+  megaMenuItem.classList.add("nav__item--mega-active");
+  updateMegaMenuTrigger(megaMenuItem);
+}
 
 function closeMegaMenu(megaMenuItem) {
-    if (!megaMenuItem) {
-        return;
-    }
-
-    megaMenuItem.classList.remove("nav__item--mega-active");
-
-    const trigger = megaMenuItem.querySelector(".nav__trigger");
-
-    if (!trigger) {
-        return;
-    }
-
-    trigger.setAttribute("aria-expanded", "false");
+  if (!megaMenuItem) {
+    return;
+  }
+  megaMenuItem.classList.remove("nav__item--mega-active");
+  updateMegaMenuTrigger(megaMenuItem);
 }
 
+function updateMegaMenuTrigger(megaMenuItem) {
+  const trigger = megaMenuItem.querySelector(".nav__trigger");
 
-// Find and close the currently active mega menu
+  if (!trigger) {
+    return;
+  }
+  const isOpen = isMegaMenuOpen(megaMenuItem);
+  trigger.setAttribute("aria-expanded", isOpen);
+}
+
+function isMegaMenuOpen(megaMenuItem) {
+  return megaMenuItem.classList.contains("nav__item--mega-active");
+}
+
 function closeActiveMegaMenu() {
-    const activeMegaMenuItem = document.querySelector(".nav__item--mega-active");
+  const activeMegaMenuItem = document.querySelector(".nav__item--mega-active");
 
-    if (!activeMegaMenuItem) {
-        return;
-    }
+  if (!activeMegaMenuItem) {
+    return;
+  }
+  closeMegaMenu(activeMegaMenuItem);
+}
 
-    closeMegaMenu(activeMegaMenuItem);
+// ------------------------------------------------------------------------
+// Utilities
+// ------------------------------------------------------------------------
+function isClickInsideNavigation(event) {
+  return event.target.closest(".nav");
 }

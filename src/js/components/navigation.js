@@ -1,45 +1,99 @@
+"use strict";
+
+/**
+ * Navigation Component
+ * --------------------
+ * Handles the navigation interactions, including:
+ * - Opening and closing the navigation
+ * - Updating ARIA attributes
+ * - Switching the navigation toggle icon
+ * - Closing the navigation on outside clicks
+ * - Closing the navigation when a navigation link is selected
+ */
+
+// ---------------------------------------------------------------------------
+// Imports
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
 export function initNavigation() {
-    const navToggle = document.querySelector("#nav-toggle");
-    const navLinks = document.querySelector("#primary-navigation");
-    const navToggleIcon = document.querySelector(".nav__toggle-icon");
+  // -----------------------------------------------------------------------
+  // DOM Elements
+  // -----------------------------------------------------------------------
+  const navigation = {
+    navToggleButton: document.querySelector(".js-nav-toggle"),
+    navList: document.querySelector(".nav__list"),
+    navToggleIcon: document.querySelector(".nav__toggle-icon"),
+    navLinks: document.querySelectorAll(".nav__link"),
+  };
 
-    if (!navToggle || !navLinks || !navToggleIcon) {
-        return;
+  // -----------------------------------------------------------------------
+  // Guard Clause
+  // -----------------------------------------------------------------------
+  if (
+    !navigation.navToggleButton ||
+    !navigation.navList ||
+    !navigation.navToggleIcon
+  ) {
+    return;
+  }
+
+  // -----------------------------------------------------------------------
+  // Event Listeners
+  // -----------------------------------------------------------------------
+  navigation.navToggleButton.addEventListener("click", () => {
+    toggleNavigation(navigation);
+  });
+
+  navigation.navLinks.forEach((navLink) => {
+    navLink.addEventListener("click", () => {
+      closeNavigation(navigation);
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!isClickInsideNavigation(event)) {
+      closeNavigation(navigation);
     }
+  });
+}
 
-    function closeMobileMenu() {
-        navLinks.classList.remove("nav__links--active");
+// ---------------------------------------------------------------------------
+// Private Helper Functions
+// ---------------------------------------------------------------------------
+function toggleNavigation(navigation) {
+  navigation.navList.classList.toggle("nav__list--active");
 
-        navToggle.setAttribute("aria-expanded", false);
+  updateNavigationToggleButton(navigation);
+}
 
-        navToggleIcon.classList.add("fa-bars");
-        navToggleIcon.classList.remove("fa-xmark");
-    }
+function closeNavigation(navigation) {
+  navigation.navList.classList.remove("nav__list--active");
 
-    navToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("nav__links--active");
+  updateNavigationToggleButton(navigation);
+}
 
-        const isMenuOpen = navLinks.classList.contains("nav__links--active");
+function updateNavigationToggleButton(navigation) {
+  const isOpen = isNavigationOpen(navigation);
 
-        navToggle.setAttribute("aria-expanded", isMenuOpen);
+  navigation.navToggleButton.setAttribute("aria-expanded", isOpen);
+  navigation.navToggleButton.setAttribute(
+    "aria-label",
+    isOpen ? "Close menu" : "Open menu",
+  );
+  navigation.navToggleIcon.classList.toggle("fa-bars", !isOpen);
+  navigation.navToggleIcon.classList.toggle("fa-xmark", isOpen);
+}
 
-        navToggleIcon.classList.toggle("fa-bars");
-        navToggleIcon.classList.toggle("fa-xmark");
-    });
+function isNavigationOpen(navigation) {
+  return navigation.navList.classList.contains("nav__list--active");
+}
 
-    const navItems = document.querySelectorAll(".nav__link");
-
-    navItems.forEach((navItem) => {
-        navItem.addEventListener("click", () => {
-            closeMobileMenu();
-        });
-    });
-
-    document.addEventListener("click", (event) => {
-        const isClickInsideNav = event.target.closest(".nav");
-
-        if (!isClickInsideNav) {
-            closeMobileMenu();
-        }
-    });
+// ---------------------------------------------------------------------------
+// Utilities
+// ---------------------------------------------------------------------------
+function isClickInsideNavigation(event) {
+  return event.target.closest(".nav");
 }
