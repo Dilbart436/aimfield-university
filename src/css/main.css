@@ -14,7 +14,6 @@
    Layout
 ======================================== */
 @import "./layout/container.css";
-@import "./layout/hero.css";
 @import "./layout/search.css";
 @import "./layout/featured-programs.css";
 @import "./layout/admission-process.css";
@@ -23,9 +22,10 @@
 @import "./layout/footer.css";
 
 /* ========================================
-   Components
+Components
 ======================================== */
 @import "./components/header.css";
+@import "./components/hero.css";
 @import "./components/mega-menu.css";
 @import "./components/auth-modal.css";
 
