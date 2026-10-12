@@ -1,31 +1,33 @@
+import Swiper from "swiper";
+
 export function initPlacementSlider() {
-    new Swiper(".placement-support__slider", {
-        loop: true,
+  new Swiper(".placement-support__slider", {
+    loop: true,
 
-        // autoplay: {
-        //     delay: 2000,
-        //     disableOnInteraction: false,
-        // },
+    // autoplay: {
+    //     delay: 2000,
+    //     disableOnInteraction: false,
+    // },
 
-        spaceBetween: 16,
+    spaceBetween: 16,
 
-        pagination: {
-            el: ".placement-support__swiper-pagination",
-            clickable: true,
-        },
+    pagination: {
+      el: ".placement-support__swiper-pagination",
+      clickable: true,
+    },
 
-        breakpoints: {
-            768: {
-                slidesPerView: 2,
-            },
+    breakpoints: {
+      768: {
+        slidesPerView: 2,
+      },
 
-            1024: {
-                slidesPerView: 2.5,
-            },
+      1024: {
+        slidesPerView: 2.5,
+      },
 
-            1280: {
-                slidesPerView: 3.2,
-            },
-        },
-    });
+      1280: {
+        slidesPerView: 3.2,
+      },
+    },
+  });
 }

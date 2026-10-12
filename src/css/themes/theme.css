@@ -31,32 +31,20 @@
     --color-info: #2563eb;
 
     /* Spacing */
-    --space-2xs: 0.125rem;
-    /* 2px  - Extra Extra Small */
-    --space-xs: 0.25rem;
-    /* 4px  - Extra Small */
-    --space-sm: 0.5rem;
-    /* 8px  - Small */
-    --space-md: 0.75rem;
-    /* 12px - Medium */
-    --space-lg: 1rem;
-    /* 16px - Large */
-    --space-xl: 1.5rem;
-    /* 24px - Extra Large */
-    --space-2xl: 2rem;
-    /* 32px - Extra Extra Large */
-    --space-3xl: 3rem;
-    /* 48px - Triple Extra Large */
+    --space-2xs: 0.125rem;  /* 2px  - Extra Extra Small */
+    --space-xs: 0.25rem;    /* 4px  - Extra Small */
+    --space-sm: 0.5rem;     /* 8px  - Small */
+    --space-md: 0.75rem;    /* 12px - Medium */
+    --space-lg: 1rem;       /* 16px - Large */
+    --space-xl: 1.5rem;     /* 24px - Extra Large */
+    --space-2xl: 2rem;      /* 32px - Extra Extra Large */
+    --space-3xl: 3rem;      /* 48px - Triple Extra Large */
 
     /* Border Radius */
-    --radius-sm: 0.5rem;
-    /* 8px  - Small */
-    --radius-md: 0.75rem;
-    /* 12px - Medium */
-    --radius-lg: 1rem;
-    /* 16px - Large */
-    --radius-xl: 1.5rem;
-    /* 24px - Extra Large */
+    --radius-sm: 0.5rem;    /* 8px  - Small */
+    --radius-md: 0.75rem;   /* 12px - Medium */
+    --radius-lg: 1rem;      /* 16px - Large */
+    --radius-xl: 1.5rem;    /* 24px - Extra Large */
 
     --radius-full: 9999px;
     --radius-circle: 50%;
