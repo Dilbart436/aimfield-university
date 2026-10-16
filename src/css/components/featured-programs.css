@@ -5,13 +5,13 @@
     padding: var(--section-spacing-mobile) 0 0;
 }
 
-.featured-programs__header {
+.featured-programs__top {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
 }
 
-.featured-programs__heading {
+.featured-programs__intro {
     flex: 1;
 }
 
@@ -60,17 +60,17 @@
     transform: translateX(0.25rem);
 }
 
-.featured-programs__grid {
+.featured-programs__list {
     display: flex;
     gap: var(--space-sm);
     margin-top: 1rem;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
 }
 
-.featured-programs__grid::-webkit-scrollbar {
+.featured-programs__list::-webkit-scrollbar {
     display: none;
 }
 
@@ -78,7 +78,6 @@
     /* Slightly wider than 90% to prevent subtitle wrapping on narrow devices (e.g. iPhone SE) */
     flex: 0 0 93%;
     scroll-snap-align: start;
-    /* background-color: red; */
     padding-top: 0.125rem;
 }
 
@@ -115,15 +114,6 @@
     gap: var(--space-sm);
 }
 
-.program-card__heading {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-    gap: 0.2rem;
-}
-
 .program-card__icon {
     flex-shrink: 0;
     width: 2.625rem;
@@ -145,11 +135,13 @@
     color: var(--color-text-primary);
 }
 
-.program-card__content {
+.program-card__heading {
+    flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
-    flex: 1;
+    justify-content: center;
+    gap: 0.2rem;
 }
 
 .program-card__title {
@@ -189,17 +181,8 @@
         transform 0.3s ease;
 }
 
-.program-card__link:hover,
-.program-card__link:hover i {
+.program-card__link:hover {
     color: var(--color-accent-hover);
-}
-
-.program-card__link:focus-visible {
-    outline: 3px solid var(--color-accent-outline);
-    outline-offset: 4px;
-    border-radius: var(--radius-sm);
-    background-color: var(--color-hover-background);
-    box-shadow: 0 0 0 3px var(--color-focus-ring);
 }
 
 .program-card__link i {
@@ -208,6 +191,14 @@
 
 .program-card__link:hover i {
     transform: translateX(0.25rem);
+}
+
+.program-card__link:focus-visible {
+    outline: 3px solid var(--color-accent-outline);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-hover-background);
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
 }
 
 
@@ -219,14 +210,14 @@
         padding: var(--section-spacing-tablet) 0;
     }
 
-    .featured-programs__header {
+    .featured-programs__top {
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-end;
         gap: var(--space-lg);
     }
 
-    .featured-programs__grid {
+    .featured-programs__list {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         overflow-x: visible;
@@ -243,13 +234,7 @@
         padding: var(--section-spacing-desktop) 0;
     }
 
-    .featured-programs__header {
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: space-between;
-    }
-
-    .featured-programs__grid {
+    .featured-programs__list {
         grid-template-columns: repeat(3, 1fr);
     }
 }
