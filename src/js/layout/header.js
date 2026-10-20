@@ -1,4 +1,4 @@
-import { getUrl } from "../../utils/url.js";
+import { getUrl } from "../utils/url.js";
 
 const headerMarkup = `
       <div class="container">

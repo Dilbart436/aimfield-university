@@ -514,71 +514,70 @@
       </section>
 
       <!-- Campus Life -->
-      <section class="campus-life">
+      <section class="campus-life" aria-labelledby="campus-life-title">
          <div class="container">
 
             <div class="campus-life__header">
                <div class="campus-life__content">
-                  <h2 class="campus-life__title">
+                  <h2 class="campus-life__title" id="campus-life-title">
                      Campus Life
                   </h2>
                   <p class="campus-life__description">
                      Experience a vibrant and inspiring life beyond academics.
                   </p>
                </div>
+
                <a href="pages/campus-life/" class="campus-life__cta">
-                  <span class="campus-life__cta-text">
-                     Explore Campus Life
-                  </span>
-                  <span class="campus-life__cta-icon">
-                     <i class="fa-solid fa-arrow-right"></i>
-                  </span>
+                  Explore Campus Life
+                  <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                </a>
             </div>
 
             <div class="campus-life__slider">
-               <!-- Card-1 -->
+               <!-- Card 1: Clubs & Activities -->
                <article class="campus-life__card">
                   <div class="campus-life__image-wrapper">
-                     <img src="/img/campus-life/campus-life-1.jpg" alt="Students participating in campus activities"
+                     <img src="/img/campus-life/campus-life-1.jpg"
+                        class="campus-life__image"
+                        alt="Students participating in campus activities">
+                  </div>
+
+                  <div class="campus-life__card-content">
+                     <div class="campus-life__card-header">
+                        <div class="campus-life__icon">
+                           <i class="fa-solid fa-users" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="campus-life__card-title">
+                           Clubs & Activities
+                        </h3>
+                     </div>
+
+                     <p class="campus-life__card-description">
+                        Join student clubs, events, and leadership programs that enrich campus life.
+                     </p>
+
+                     <a href="pages/campus-life/clubs/"
+                        class="campus-life__link"
+                        aria-label="Learn more about Clubs and Activities">
+                        Learn More
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                     </a>
+                  </div>
+               </article>
+
+               <!-- Card 2: Sports & Fitness -->
+               <article class="campus-life__card">
+                  <div class="campus-life__image-wrapper">
+                     <img src="/img/campus-life/campus-life-2.jpg"
+                        alt="Students participating in sports and fitness activities"
                         class="campus-life__image">
                   </div>
 
                   <div class="campus-life__card-content">
                      <div class="campus-life__card-header">
                         <div class="campus-life__icon">
-                           <i class="fa-solid fa-users"></i>
+                           <i class="fa-solid fa-dumbbell" aria-hidden="true"></i>
                         </div>
-                        <h3 class="campus-life__card-title">
-                           Clubs & Activities
-                        </h3>
-                     </div>
-                     <p class="campus-life__card-description">
-                        Join student clubs, events, and leadership programs that enrich campus life.
-                     </p>
-                     <a href="pages/campus-life/clubs/" class="campus-life__link">
-                        <span class="campus-life__link-text">
-                           Learn More
-                        </span>
-                        <span class="campus-life__link-icon">
-                           <i class="fa-solid fa-arrow-right"></i>
-                        </span>
-                     </a>
-                  </div>
-               </article>
-               <!-- Card-2 -->
-               <article class="campus-life__card">
-                  <div class="campus-life__image-wrapper">
-                     <img src="/img/campus-life/campus-life-2.jpg"
-                        alt="Students participating in sports and fitness activities" class="campus-life__image">
-                  </div>
-
-                  <div class="campus-life__card-content">
-                     <div class="campus-life__card-header">
-                        <div class="campus-life__icon">
-                           <i class="fa-solid fa-dumbbell"></i>
-                        </div>
-
                         <h3 class="campus-life__card-title">
                            Sports & Fitness
                         </h3>
@@ -588,29 +587,28 @@
                         Stay active with sports programs, fitness facilities, and recreational activities.
                      </p>
 
-                     <a href="pages/campus-life/sports/" class="campus-life__link">
-                        <span class="campus-life__link-text">
-                           Learn More
-                        </span>
-                        <span class="campus-life__link-icon">
-                           <i class="fa-solid fa-arrow-right"></i>
-                        </span>
+                     <a href="pages/campus-life/sports/"
+                        class="campus-life__link"
+                        aria-label="Learn more about Sports and Fitness">
+                        Learn More
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                      </a>
                   </div>
                </article>
-               <!-- Card-3 -->
+
+               <!-- Card 3: Hostel Facilities -->
                <article class="campus-life__card">
                   <div class="campus-life__image-wrapper">
-                     <img src="/img/campus-life/campus-life-3.jpg" alt="Students collaborating in university clubs"
+                     <img src="/img/campus-life/campus-life-3.jpg"
+                        alt="Students studying together in a university hostel"
                         class="campus-life__image">
                   </div>
 
                   <div class="campus-life__card-content">
                      <div class="campus-life__card-header">
                         <div class="campus-life__icon">
-                           <i class="fa-solid fa-bed"></i>
+                           <i class="fa-solid fa-bed" aria-hidden="true"></i>
                         </div>
-
                         <h3 class="campus-life__card-title">
                            Hostel Facilities
                         </h3>
@@ -620,29 +618,28 @@
                         Enjoy comfortable hostel living with modern facilities and study spaces.
                      </p>
 
-                     <a href="pages/campus-life/hostels/" class="campus-life__link">
-                        <span class="campus-life__link-text">
-                           Learn More
-                        </span>
-                        <span class="campus-life__link-icon">
-                           <i class="fa-solid fa-arrow-right"></i>
-                        </span>
+                     <a href="pages/campus-life/hostels/"
+                        class="campus-life__link"
+                        aria-label="Learn more about Hostel Facilities">
+                        Learn More
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                      </a>
                   </div>
                </article>
-               <!-- Card 4 -->
+
+               <!-- Card 4: Campus Events -->
                <article class="campus-life__card">
                   <div class="campus-life__image-wrapper">
-                     <img src="/img/campus-life/campus-life-4.jpg" alt="Students attending campus cultural events"
+                     <img src="/img/campus-life/campus-life-4.jpg"
+                        alt="Students attending campus cultural events"
                         class="campus-life__image">
                   </div>
 
                   <div class="campus-life__card-content">
                      <div class="campus-life__card-header">
                         <div class="campus-life__icon">
-                           <i class="fa-solid fa-calendar-days"></i>
+                           <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
                         </div>
-
                         <h3 class="campus-life__card-title">
                            Campus Events
                         </h3>
@@ -652,18 +649,16 @@
                         Attend cultural festivals, workshops, guest lectures, and student events.
                      </p>
 
-                     <a href="pages/campus-life/events/" class="campus-life__link">
-                        <span class="campus-life__link-text">
-                           Learn More
-                        </span>
-                        <span class="campus-life__link-icon">
-                           <i class="fa-solid fa-arrow-right"></i>
-                        </span>
+                     <a href="pages/campus-life/events/"
+                        class="campus-life__link"
+                        aria-label="Learn more about Campus Events">
+                        Learn More
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                      </a>
                   </div>
                </article>
             </div>
-
+            
          </div>
       </section>
 

@@ -6,14 +6,14 @@ import "swiper/css";
 import "../css/main.css";
 
 // Layout
-import { renderHeader } from "./components/layout/header.js";
-import { renderFooter } from "./components/layout/footer.js";
+import { renderHeader } from "./layout/header.js";
+import { renderFooter } from "./layout/footer.js";
 // Components
 import { initNavigation } from "./components/navigation.js";
 import { initMegaMenu } from "./components/mega-menu.js";
+import { initAuthModal } from "./components/auth-modal.js";
 import { initHeroSlider } from "./components/hero-slider.js";
 import { initPlacementSlider } from "./components/placement-slider.js";
-import { initAuthModal } from "./components/auth-modal.js";
 // Theme
 import { initTheme } from "./components/theme.js";
 
@@ -25,9 +25,9 @@ function initApp() {
   // Initialize Components
   initNavigation();
   initMegaMenu();
+  initAuthModal();
   initHeroSlider();
   initPlacementSlider();
-  initAuthModal();
 
   // Initialize Theme
   initTheme();
