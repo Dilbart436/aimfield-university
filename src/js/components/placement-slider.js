@@ -1,33 +1,26 @@
 import Swiper from "swiper";
+import { Pagination, Autoplay } from "swiper/modules";
 
 export function initPlacementSlider() {
-  new Swiper(".placement-support__slider", {
-    loop: true,
+    new Swiper(".placement-support__slider", {
+        modules: [Pagination, Autoplay],
+        loop: true,
+        spaceBetween: 14,
 
-    // autoplay: {
-    //     delay: 2000,
-    //     disableOnInteraction: false,
-    // },
+        pagination: {
+            el: ".placement-support__swiper-pagination",
+            clickable: true,
+        },
 
-    spaceBetween: 16,
+        // autoplay: {
+        //     delay: 2000,
+        //     disableOnInteraction: false,
+        // },
 
-    pagination: {
-      el: ".placement-support__swiper-pagination",
-      clickable: true,
-    },
-
-    breakpoints: {
-      768: {
-        slidesPerView: 2,
-      },
-
-      1024: {
-        slidesPerView: 2.5,
-      },
-
-      1280: {
-        slidesPerView: 3.2,
-      },
-    },
-  });
+        breakpoints: {
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 2.5 },
+            1280: { slidesPerView: 3 },
+        },
+    });
 }

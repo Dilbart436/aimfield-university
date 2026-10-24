@@ -58,14 +58,12 @@
 }
 
 .placement-support__link i {
-    color: var(--color-accent);
     transition:
         color 0.3s ease,
         transform 0.3s ease;
 }
 
 .placement-support__link:hover i {
-    color: var(--color-accent-hover);
     transform: translateX(4px);
 }
 
@@ -78,7 +76,7 @@
 }
 
 .placement-support__title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
     line-height: 1.2;
     color: var(--color-text-primary);
@@ -86,7 +84,7 @@
 
 .placement-support__description {
     color: var(--color-text-secondary);
-    line-height: 1.6;
+    line-height: 1.4;
 }
 
 .placement-support__stats {
@@ -145,9 +143,10 @@
     object-fit: cover;
 }
 
-/* ====== Features Styling ====== */
-.placement-support__features {
+/* ---- Career Features Slider Styling --- */
+.placement-support__slider {
     margin-top: 2rem;
+    padding: 0.25rem 0 0;
 }
 
 .placement-support__feature-card {
@@ -155,11 +154,11 @@
     flex-direction: column;
     align-items: center;
     gap: var(--space-xs);
-    padding: 1rem;
+    width: 100%;
+    padding: 1.5rem 1.25rem 1.75rem;
     background-color: var(--color-surface);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    text-align: center;
+    box-shadow: var(--shadow-card);
     transition:
         transform 0.3s ease,
         box-shadow 0.3s ease;
@@ -167,7 +166,7 @@
 
 .placement-support__feature-card:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-card-hover);
 }
 
 .placement-support__feature-card:focus-visible {
@@ -193,6 +192,7 @@
 }
 
 .placement-support__feature-title {
+    margin-bottom: 0.125rem;
     font-size: 1.125rem;
     font-weight: 600;
     color: var(--color-text-primary);
@@ -203,7 +203,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-2xs);
-    text-align: left;
 }
 
 .placement-support__feature-list li {
@@ -220,11 +219,11 @@
 }
 
 .placement-support__swiper-pagination {
+    position: static;
     display: flex;
     justify-content: center;
     gap: var(--space-2xs);
     border-radius: var(--radius-full);
-    position: static;
     margin-top: var(--space-lg);
     margin-bottom: var(--space-xs);
 }
@@ -247,6 +246,7 @@
 }
 
 .placement-support__swiper-pagination .swiper-pagination-bullet:hover {
+    cursor: pointer;
     background-color: var(--color-accent-hover);
 }
 
@@ -315,7 +315,6 @@
     border-radius: var(--radius-md);
     font-size: 0.95rem;
     font-weight: 600;
-    text-decoration: none;
 }
 
 .placement-support__cta-button i {
@@ -323,7 +322,7 @@
 }
 
 .placement-support__cta-button:active {
-    transform: translateY(1px);
+    transform: translateY(0);
 }
 
 .placement-support__cta-button--primary {
@@ -361,9 +360,9 @@
 
 .placement-support__cta-button--secondary:hover {
     color: var(--color-accent-hover);
-    transform: translateY(-2px);
     background-color: var(--color-hover-background);
     box-shadow: var(--shadow-button);
+    transform: translateY(-2px);
 }
 
 .placement-support__cta-button--secondary:focus-visible {
@@ -384,16 +383,16 @@
     .placement-support__overview {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-xl);
         align-items: center;
-    }
-
-    .placement-support__media {
-        height: 26rem;
+        gap: var(--space-xl);
     }
 
     .placement-support__content {
         gap: var(--space-md);
+    }
+
+    .placement-support__media {
+        height: 26rem;
     }
 
     .placement-support__slider {
@@ -405,7 +404,7 @@
     }
 
     .placement-support__cta-button {
-        flex: 1;
+        flex: 1 1 0%;
         padding: 1rem 1.25rem;
     }
 }
@@ -419,6 +418,10 @@
         grid-template-columns: 1fr 1fr;
     }
 
+    .placement-support__feature-list {
+        padding-left: 0.25rem;
+    }
+
     .placement-support__cta {
         flex-direction: row;
         align-items: center;
@@ -426,11 +429,11 @@
         gap: var(--space-lg);
     }
 
-    .placement-support__cta-button {
-        flex: initial;
-    }
-
     .placement-support__cta-content {
         flex: 1;
+    }
+    
+    .placement-support__cta-button {
+        flex: initial;
     }
 }

@@ -14,7 +14,6 @@
    Layout
 ======================================== */
 @import "./layout/container.css";
-@import "./layout/placement-support.css";
 @import "./layout/footer.css";
 
 /* ========================================
@@ -26,6 +25,7 @@ Components
 @import "./components/featured-programs.css";
 @import "./components/admission-process.css";
 @import "./components/campus-life.css";
+@import "./components/placement-support.css";
 @import "./components/mega-menu.css";
 @import "./components/auth-modal.css";
 
